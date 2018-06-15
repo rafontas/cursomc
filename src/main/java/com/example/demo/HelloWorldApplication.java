@@ -44,7 +44,7 @@ public class HelloWorldApplication implements CommandLineRunner {
 		p3.getCategorias().addAll(Arrays.asList(c1));
 		
 		// Salva os produtos
-		RepositorioCategoria.saveAll(Arrays.asList(c1, c2));
-		RepositorioProduto.saveAll(Arrays.asList(p1, p2, p3));
+		// RepositorioCategoria.saveAll(Arrays.asList(c1, c2));
+		// RepositorioProduto.saveAll(Arrays.asList(p1, p2, p3));
 	}
 }

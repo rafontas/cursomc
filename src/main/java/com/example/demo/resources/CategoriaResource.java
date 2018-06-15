@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.domain.Categoria;
 import com.example.demo.services.CategoriaService;
 
+import javassist.tools.rmi.ObjectNotFoundException;
+
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
@@ -18,25 +20,8 @@ public class CategoriaResource {
 	private CategoriaService servico;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> Find(@PathVariable Integer id) {
-		try {
-			Categoria c = servico.buscar(id);
-			return ResponseEntity.ok().body(c);
-		}
-		catch(Exception e) {
-			return ResponseEntity.badRequest().body(null);
-		}
-	} 
-
-//	public ResponseEntity<?> Add(@PathVariable Integer id, @PathVariable String nome) {
-//		try {
-//			Categoria c = new Categoria(id, nome);
-//			servico.add(c);
-//			
-//			return ResponseEntity.ok().body(c);
-//		}
-//		catch(Exception e) {
-//			return ResponseEntity.badRequest().body(null);
-//		}
-//	} 
+	public ResponseEntity<?> Find(@PathVariable Integer id) throws ObjectNotFoundException {
+		Categoria c = servico.buscar(id);
+		return ResponseEntity.ok().body(c);
+	}  
 }

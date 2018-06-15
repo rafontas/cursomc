@@ -8,11 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -52,7 +51,6 @@ public class Categoria implements Serializable{
 		this.nome = nome;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -61,7 +59,6 @@ public class Categoria implements Serializable{
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
-	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -85,6 +82,7 @@ public class Categoria implements Serializable{
 		return true;
 	}
 
+	@JsonManagedReference
 	public List<Produto> getProdutos() {
 		return produtos;
 	}
