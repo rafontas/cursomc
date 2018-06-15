@@ -8,13 +8,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.domain.Categoria;
+import com.example.demo.domain.Produto;
 import com.example.demo.repositories.CategoriaRepository;
+import com.example.demo.repositories.ProdutoRepository;
 
 @SpringBootApplication
 public class HelloWorldApplication implements CommandLineRunner {
 
 	@Autowired
-	private CategoriaRepository Repositorio;
+	private CategoriaRepository RepositorioCategoria;
+
+	@Autowired
+	private ProdutoRepository RepositorioProduto;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(HelloWorldApplication.class, args);
@@ -22,10 +27,24 @@ public class HelloWorldApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Categoria c1 = new Categoria(null, "Categoria 2");
-		Categoria c2 = new Categoria(null, "Categoria 3");
+		// Salva os produtos básicos
+		Categoria c1 = new Categoria(null, "Informática");
+		Categoria c2 = new Categoria(null, "Escritório");
 		
+		Produto p1 = new Produto(null, "Computador", 2000.00);
+		Produto p2 = new Produto(null, "Impressora", 800.00);
+		Produto p3 = new Produto(null, "Mouse", 80.00);
 
-		Repositorio.saveAll(Arrays.asList(c1, c2));
+		// Salva as associações
+		c1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
+		c2.getProdutos().addAll(Arrays.asList(p2));
+		
+		p1.getCategorias().addAll(Arrays.asList(c1));
+		p2.getCategorias().addAll(Arrays.asList(c1, c2));
+		p3.getCategorias().addAll(Arrays.asList(c1));
+		
+		// Salva os produtos
+		RepositorioCategoria.saveAll(Arrays.asList(c1, c2));
+		RepositorioProduto.saveAll(Arrays.asList(p1, p2, p3));
 	}
 }
