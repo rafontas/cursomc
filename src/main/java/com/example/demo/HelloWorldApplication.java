@@ -13,6 +13,7 @@ import com.example.demo.domain.Cidade;
 import com.example.demo.domain.Cliente;
 import com.example.demo.domain.Endereco;
 import com.example.demo.domain.Estado;
+import com.example.demo.domain.ItemPedido;
 import com.example.demo.domain.Pagamento;
 import com.example.demo.domain.PagamentoComBoleto;
 import com.example.demo.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.example.demo.repositories.CidadeRepository;
 import com.example.demo.repositories.ClienteRepository;
 import com.example.demo.repositories.EnderecoRepository;
 import com.example.demo.repositories.EstadoRepository;
+import com.example.demo.repositories.ItemPedidoRepository;
 import com.example.demo.repositories.PagamentoRepository;
 import com.example.demo.repositories.PedidoRepository;
 import com.example.demo.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class HelloWorldApplication implements CommandLineRunner {
 
 	@Autowired
 	private PagamentoRepository RepositorioPagamento;
+
+	@Autowired
+	private ItemPedidoRepository RepositorioItemPedido;	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(HelloWorldApplication.class, args);
@@ -63,12 +68,12 @@ public class HelloWorldApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// Salva os produtos básicos
-		Categoria c1 = new Categoria(null, "Informática");
-		Categoria c2 = new Categoria(null, "Escritório");
+		Categoria c1 = new Categoria(4, "Informática");
+		Categoria c2 = new Categoria(5, "Escritório");
 		
-		Produto p1 = new Produto(null, "Computador", 2000.00);
-		Produto p2 = new Produto(null, "Impressora", 800.00);
-		Produto p3 = new Produto(null, "Mouse", 80.00);
+		Produto p1 = new Produto(1, "Computador", 2000.00);
+		Produto p2 = new Produto(2, "Impressora", 800.00);
+		Produto p3 = new Produto(3, "Mouse", 80.00);
 
 		// Salva as associações
 		c1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
@@ -109,6 +114,20 @@ public class HelloWorldApplication implements CommandLineRunner {
 		ped2.setPagamento(pg2);
 		
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		
+		// S02A26 - Cria, Mapeia e Salva os Itens de Pedido
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 2000.00, 1);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 80.00, 2);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 800.00, 1);		
+
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));		
+
+		//RepositorioItemPedido.saveAll(Arrays.asList(ip1,ip2,ip3)); 
 		
 		// RepositorioPedido.saveAll(Arrays.asList(ped1, ped2));
 		// RepositorioPagamento.saveAll(Arrays.asList(pg1, pg2));
