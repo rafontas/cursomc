@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Pedido implements Serializable{
 	
@@ -31,6 +34,8 @@ public class Pedido implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) // Indica que será gerado automaticamento	
 	private Integer id;
+
+	@JsonFormat(pattern="dd/MM/yyy HH:mm")
 	private Date instante;
 	
 	public Set<ItemPedido> getItens() {
@@ -41,9 +46,11 @@ public class Pedido implements Serializable{
 		this.itens = itens;
 	}
 	
+	@JsonManagedReference // Indica que os pagamentos de um pedidos serão serializados
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
 	
+	@JsonManagedReference // Indica que os clientes de um pedidos serão serializados
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
