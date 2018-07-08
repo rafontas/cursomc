@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -82,7 +81,6 @@ public class Categoria implements Serializable{
 		return true;
 	}
 
-	@JsonManagedReference
 	public List<Produto> getProdutos() {
 		return produtos;
 	}

@@ -34,10 +34,9 @@ public class ItemPedido  implements Serializable {
 		return id;
 	}
 
-	@JsonIgnore // Tudo que começa com get é serializado
+	@JsonIgnore
 	public Pedido getPedido() {return id.getPedido(); }
 
-	//@JsonIgnore // Tudo que começa com get é serializado
 	public Produto getProduto() {return id.getProduto(); }	
 	
 	public void setId(ItemPedidoPK id) {
