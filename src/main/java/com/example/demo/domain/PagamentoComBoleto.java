@@ -1,16 +1,20 @@
 package com.example.demo.domain;
 
-import java.sql.Date;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
 
 import com.example.demo.domain.enuns.EstadoPagamento;
 
+@Entity
 public class PagamentoComBoleto extends Pagamento {
 
 	private static final long serialVersionUID = 1L;
 	
-	public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {
+	public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date date, Date dataPagamento) {
 		super(id, estado, pedido);
-		this.dataVencimento = dataVencimento;
+		this.dataVencimento = date;
 		this.dataPagamento = dataPagamento;
 	}
 
