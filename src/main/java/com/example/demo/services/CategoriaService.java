@@ -26,4 +26,9 @@ public class CategoriaService {
 	public void add(Categoria C) {
 		repositorio.save(C);
 	}
+	
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);
+		return repositorio.save(obj);
+	}
 }
