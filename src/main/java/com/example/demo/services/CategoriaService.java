@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.DTOS.CategoriaDTO;
 import com.example.demo.domain.Categoria;
 import com.example.demo.repositories.CategoriaRepository;
 import com.examples.demo.excecoes.DadoNaoEncontradoException;
@@ -62,4 +63,7 @@ public class CategoriaService {
 		return repositorio.findAll(pageRequest);
 	}
 	
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(), objDTO.getNome());
+	}
 }
