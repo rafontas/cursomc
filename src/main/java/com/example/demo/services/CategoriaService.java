@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.DTOS.CategoriaDTO;
 import com.example.demo.domain.Categoria;
 import com.example.demo.repositories.CategoriaRepository;
-import com.examples.demo.excecoes.DadoNaoEncontradoException;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -50,7 +49,7 @@ public class CategoriaService {
 			repositorio.deleteById(id);
 		}
 		catch(DataIntegrityViolationException e) {
-			throw new DadoNaoEncontradoException("Não é possível excluir uma categoria que possui produtos."); 
+			throw new ObjectNotFoundException("Não é possível excluir uma categoria que possui produtos."); 
 		}
 	}
 
