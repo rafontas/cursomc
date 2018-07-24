@@ -39,7 +39,6 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria obj) {
-		//if(this.buscar(obj.getId()))
 		return repositorio.save(obj);
 	}
 	
