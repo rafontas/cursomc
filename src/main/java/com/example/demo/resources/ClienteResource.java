@@ -43,14 +43,8 @@ public class ClienteResource {
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
-		try {
-			servico.delete(id);			
-		}
-		catch(ObjectNotFoundException e ) {
-			
-		}
-		
+	public ResponseEntity<Void> delete(@PathVariable Integer id) throws ObjectNotFoundException {
+		servico.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 

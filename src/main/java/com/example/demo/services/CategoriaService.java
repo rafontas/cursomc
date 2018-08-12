@@ -38,7 +38,9 @@ public class CategoriaService {
 		return repositorio.save(obj);
 	}
 
-	public Categoria update(Categoria obj) {
+	public Categoria update(Categoria obj) throws ObjectNotFoundException {
+		Categoria newObj = this.buscar(obj.getId());
+		this.atualizaDados(newObj, obj);
 		return repositorio.save(obj);
 	}
 	
@@ -64,4 +66,8 @@ public class CategoriaService {
 	public Categoria fromDTO(CategoriaDTO objDTO) {
 		return new Categoria(objDTO.getId(), objDTO.getNome());
 	}
+	
+	private void atualizaDados(Categoria novo, Categoria antigo) {
+		novo.setNome(antigo.getNome());
+	}	
 }
