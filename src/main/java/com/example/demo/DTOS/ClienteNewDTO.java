@@ -2,20 +2,40 @@ package com.example.demo.DTOS;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.example.demo.services.validation.CpfOuCNPJInsert;
+
+@CpfOuCNPJInsert
 public class ClienteNewDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@NotEmpty(message="O campo é obrigatório.")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
 	private String nome;
+	
+	@NotEmpty(message="O campo é obrigatório.")
+	@Email	
 	private String email;
+	
+	@NotEmpty(message="O campo é obrigatório.")	
 	private String cpfOuCnpj;
 	private Integer tipoCliente;
 	
+	@NotEmpty(message="O campo é obrigatório.")
 	private String logradouro;
+	
+	@NotEmpty(message="O campo é obrigatório.")   
 	private String numero;
 	private String complemento;
 	private String bairro;
-	private String cep;
+	
+	@NotEmpty(message="O campo é obrigatório.")
+    private String cep;
 	
 	private String telefone1;
 	private String telefone2;
