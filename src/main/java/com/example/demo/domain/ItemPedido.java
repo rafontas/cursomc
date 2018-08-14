@@ -34,14 +34,19 @@ public class ItemPedido  implements Serializable {
 	private Double desconto;
 	private Double preco;
 	private Integer quantidade;
+	
 	public ItemPedidoPK getId() {
 		return id;
 	}
 
 	@JsonIgnore
-	public Pedido getPedido() {return id.getPedido(); }
+	public Pedido getPedido() { return id.getPedido(); }
 
+	public void setPedido(Pedido ped) { id.setPedido(ped); }	
+	
 	public Produto getProduto() {return id.getProduto(); }	
+
+	public void setProduto(Produto prod) { id.setProduto(prod); }	
 	
 	public void setId(ItemPedidoPK id) {
 		this.id = id;
