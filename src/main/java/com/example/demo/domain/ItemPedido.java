@@ -23,6 +23,10 @@ public class ItemPedido  implements Serializable {
 	
 	public ItemPedido() {}
 
+	public double getSubTotal() {
+		return (preco - desconto) * quantidade;
+	}
+	
 	@EmbeddedId
 	@JsonIgnore // Indica para o Java não serializar o Item Pedido
 	private ItemPedidoPK id = new ItemPedidoPK();
